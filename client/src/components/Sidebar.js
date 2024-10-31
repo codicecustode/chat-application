@@ -1,11 +1,16 @@
 // Sidebar.js
 import React,{ useState } from 'react'
-import { Nav, Tab } from 'react-bootstrap'
+import { Nav, Tab, Button } from 'react-bootstrap'
 import { Contacts } from './Contact'
 import { Conversations } from './Conversation'
 
+
 const Sidebar = ({id}) => {
     const [activeKey, setActiveKey] = useState('contact')
+    const [show, setShow] = useState(false)
+    const newConversationOpen = activeKey === 'conversation'
+    const handleShow = () => setShow(!show)
+    const handleHide = ()=> setShow(!show)
   return (
     <div className="d-flex flex-column" style={{height:"100vh", width:"30vw", overflowY:"auto"}}>
         <Tab.Container activeKey={activeKey} onSelect={(k) => setActiveKey(k)}>
@@ -31,6 +36,14 @@ const Sidebar = ({id}) => {
                 console.log(id)
                 Your is : {id.id}
             </div>
+
+            <Button style={{borderRadius: '0'}}>
+                New { newConversationOpen ? 'Conversation' : 'Contact'}
+            </Button>
+
+
+
+
         </Tab.Container>
 
     </div>
