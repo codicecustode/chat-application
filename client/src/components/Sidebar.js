@@ -1,13 +1,13 @@
 // Sidebar.js
 import React,{ useState } from 'react'
-import { Navbar, Nav, Tab } from 'react-bootstrap'
+import { Nav, Tab } from 'react-bootstrap'
 import { Contacts } from './Contact'
 import { Conversations } from './Conversation'
 
-const Sidebar = () => {
+const Sidebar = ({id}) => {
     const [activeKey, setActiveKey] = useState('contact')
   return (
-    <div className="flex-column" style={{height:"100vh", width:"30vw", overflowY:"auto"}}>
+    <div className="d-flex flex-column" style={{height:"100vh", width:"30vw", overflowY:"auto"}}>
         <Tab.Container activeKey={activeKey} onSelect={(k) => setActiveKey(k)}>
             <Nav variant="tabs" style={{dispaly:"flex", justifyContent:"space-around"}}>
                 <Nav.Item>
@@ -26,6 +26,11 @@ const Sidebar = () => {
                     <Conversations />
                 </Tab.Pane>
             </Tab.Content>
+
+            <div style={{ borderTop: '1px solid #ccc', borderRight: '1px solid #ccc' }}>
+                console.log(id)
+                Your is : {id.id}
+            </div>
         </Tab.Container>
 
     </div>
