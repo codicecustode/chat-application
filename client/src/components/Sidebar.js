@@ -3,15 +3,14 @@ import React, { useState } from 'react'
 import { Nav, Tab, Button } from 'react-bootstrap'
 import { Contacts } from './Contact'
 import { Conversations } from './Conversation'
+import { useModelShow } from '../context/ModelShowContext'
 
 
 
 const Sidebar = ({ id }) => {
     const [activeKey, setActiveKey] = useState('contact')
-    const [show, setShow] = useState(false)
+    const { handleShow } = useModelShow();
     const newConversationOpen = activeKey === 'conversation'
-    const handleShow = () => setShow(!show)
-    const handleHide = () => setShow(!show)
     return (
         <>
             <div className="d-flex flex-column" style={{ height: "100vh", width: "30vw", overflowY: "auto" }}>
@@ -39,7 +38,7 @@ const Sidebar = ({ id }) => {
                         Your is : {id.id}
                     </div>
 
-                    <Button style={{ borderRadius: '0' }} onClick={handleShow}>
+                    <Button style={{ borderRadius: '0' }} onClick={ handleShow }>
                         New {newConversationOpen ? 'Conversation' : 'Contact'}
                     </Button>
                 </Tab.Container>
