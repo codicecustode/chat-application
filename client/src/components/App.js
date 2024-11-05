@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      {id ? <Dashboard id={id}/> : <Login onSubmitId={setId}/> }
+      {id ? <Dashboard id={id} /> : <Login onSubmitId={setId} />}
     </>
   );
 }
