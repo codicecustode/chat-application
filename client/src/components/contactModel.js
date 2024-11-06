@@ -1,18 +1,17 @@
-
+import React, { useRef } from 'react'
 import { useModelShow } from '../context/ModelShowContext';
-
+import { useContacts } from '../context/ContactsProvider';
 export const NewContact = () => {
 
+    const nameRef = useRef();
+    const idRef = useRef();
+
     const { handleHide } = useModelShow();
+    const { createContact } = useContacts();
 
     const handleSubmit = (e) => {
-        e.prevendefault();
-        const { name, id } = e.target.elements;
-        const contact = {
-            name: name.value,
-            id: id.value
-        }
-        alert(contact)
+        e.preventDefault();
+        createContact(idRef.current.value, nameRef.current.value);
         handleHide()
     }
 
