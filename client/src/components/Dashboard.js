@@ -1,10 +1,11 @@
 import Sidebar from "./Sidebar"
 import { NewContact } from './contactModel'
 import { useModelShow } from '../context/ModelShowContext'
+import { ContactsProvider} from '../context/ContactsProvider'
 export const Dashboard = (id) => {
     const { show } = useModelShow();
     return (
-        <>
+        <ContactsProvider>
             <div style={{ display: "flex" }}>
                 <Sidebar id={id} />
 
@@ -20,6 +21,6 @@ export const Dashboard = (id) => {
                     <NewContact />
                 </div> }
             </div>
-        </>
+        </ContactsProvider>
     )
 }
