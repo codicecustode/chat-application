@@ -1,10 +1,23 @@
-export const Conversations = () => {
-    return (
-        <div>
-            <h1>
-                conversation
-            </h1>
-        </div>
-    )
+import React from 'react';
+import { ListGroup } from 'react-bootstrap';
+import { useConversation } from '../context/ConversationProvider';
 
+export const Conversations = () => {
+    const { conversations, selectConversationIndex } = useConversation()
+
+    return (
+        <ListGroup variant="flush">
+            {conversations.map((conversation, index) => (
+                <ListGroup.Item 
+                    key={index}
+                    action
+                    onClick={() => selectConversationIndex(index)}
+                    active={conversation.selected}
+                >
+                    {conversation.recipients.map(r => r.name).join(', ')}
+                </ListGroup.Item>
+            ))}
+        </ListGroup>
+    )
 }
+
