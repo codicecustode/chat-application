@@ -1,7 +1,9 @@
 // Sidebar.js
-import React, { useState } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 import { Nav, Tab, Button } from 'react-bootstrap'
 import { Contacts } from './Contact'
+import { NewContact } from './contactModel'
+import { NewConversation } from './ConversationModel'
 import { Conversations } from './Conversation'
 import { useModelShow } from '../context/ModelShowContext'
 
@@ -9,8 +11,12 @@ import { useModelShow } from '../context/ModelShowContext'
 
 const Sidebar = ({ id }) => {
     const [activeKey, setActiveKey] = useState('contact')
-    const { handleShow } = useModelShow();
+    const { show, handleShow, handleHide } = useModelShow();
     const newConversationOpen = activeKey === 'conversation'
+    
+    useLayoutEffect(() => {
+        handleHide()
+    }, [activeKey])
     return (
         <>
             <div className="d-flex flex-column" style={{ height: "100vh", width: "30vw", overflowY: "auto" }}>
@@ -44,6 +50,9 @@ const Sidebar = ({ id }) => {
                 </Tab.Container>
 
             </div>
+            { show && <div style={{ height: "100vh", width: "60vw", marginLeft: "10vw" }}>
+                {newConversationOpen ? <NewConversation /> : <NewContact />}
+            </div> }
 
         </>
     );
