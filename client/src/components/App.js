@@ -9,7 +9,7 @@ function App() {
 
   return (
     <ContactsProvider>
-      <ConversationProvider>
+      <ConversationProvider id={id}>
         <ModelShowProvider>
           {id ? <Dashboard id={id} /> : <Login onSubmitId={setId} />}
         </ ModelShowProvider>
