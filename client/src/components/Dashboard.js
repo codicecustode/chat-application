@@ -7,7 +7,7 @@ export const Dashboard = (id) => {
 
         <div style={{ display: "flex" }}>
             <Sidebar id={id} />
-            <OpenConversation />
+            {selectedConversation && <OpenConversation />}
         </div>
     )
 }
