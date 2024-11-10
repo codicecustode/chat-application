@@ -58,6 +58,14 @@ export const ConversationProvider = ({ id, children }) => {
             return { id: recipient, name }
         })
 
+        const messages = conversation.messages.map(message => {
+            const sender = contacts.find(contact => contact.id === message.sender)
+            const name = (sender && sender.name) || message.sender
+            const fromMe = id === message.sender
+            return { ...message, senderName: name, fromMe }
+        })
+
+
         const selected = index === selectedConversationIndex
 
         return { ...conversation, recipients, selected }
