@@ -9,7 +9,7 @@ import { useModelShow } from '../context/ModelShowContext'
 
 
 
-const Sidebar = ({ id }) => {
+const Sidebar = ({ id, setShowConversation }) => {
     const [activeKey, setActiveKey] = useState('contact')
     const { show, handleShow, handleHide } = useModelShow();
     const newConversationOpen = activeKey === 'conversation'
@@ -51,7 +51,7 @@ const Sidebar = ({ id }) => {
 
             </div>
             { show && <div style={{ height: "100vh", width: "60vw", marginLeft: "10vw" }}>
-                {newConversationOpen ? <NewConversation /> : <NewContact />}
+                {newConversationOpen ? <NewConversation setShowConversation={setShowConversation} /> : <NewContact setShowConversation={setShowConversation}/>}
             </div> }
 
         </>
