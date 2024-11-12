@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Modal, Button, Form, Alert } from 'react-bootstrap'
 import { useContacts } from '../context/ContactsProvider';
 import { useConversation } from '../context/ConversationProvider';
 export const NewConversation = ({ setShowConversation }) => {
 
-    setShowConversation(false)
+    //setShowConversation(false)
     const [selectedContactIds, setSelectedContactIds] = useState([])
     const { contacts } = useContacts()
+    const [error, setError] = useState(null);
     const { createConversation } = useConversation()
 
     const handleCheckBoxChange = (contactId) => {
@@ -20,6 +21,13 @@ export const NewConversation = ({ setShowConversation }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         // logic to create conversation
+        if (selectedContactIds.length === 0) {
+            setError("Please select at least one contact to create a conversation.");
+            return;
+        }
+
+        setError(null);
+        setShowConversation(true)
         createConversation(selectedContactIds)
     }
 
@@ -27,6 +35,7 @@ export const NewConversation = ({ setShowConversation }) => {
     return (
         <>
             <Modal.Header>Create Conversation</Modal.Header>
+            {error && <Alert variant="danger">{error}</Alert>}
             <Modal.Body>
 
                 <Form onSubmit={handleSubmit}>

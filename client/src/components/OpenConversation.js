@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useRef, useEffect } from 'react'
 import { Form, InputGroup, Button } from 'react-bootstrap'
 import { useConversation } from '../context/ConversationProvider'
 
@@ -6,6 +6,7 @@ import { useConversation } from '../context/ConversationProvider'
 export const OpenConversation = () => {
     const [text, setText] = useState('')
     const { sendMessage, selectedConversation } = useConversation()
+    const lastMessageRef = useRef()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -16,33 +17,37 @@ export const OpenConversation = () => {
         )
         setText('')
     }
-    console.log(selectedConversation)
+    useEffect(() => {
+        if (lastMessageRef.current) {
+            lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    } , [selectedConversation.messages]);
     return (
-        <div className="d-flex flex-column flex-grow-1">
-            <div className="flex-grow-1 overflow-auto">
-                <div className="h-100 d-flex flex-column
-                align-items-start justify-content-end px-3">
+        <div className="d-flex flex-column flex-grow-1" style={{ height: '100vh' }}>
+            <div className="flex-grow-1 overflow-auto" style={{ height: 'calc(100vh - 150px)' }}>
+                <div className="d-flex flex-column
+                align-items-start justify-content-end px-3" style={{ minHeight: '100%' }}>
 
                     {
                         selectedConversation.messages.map((message, index) => {
                             return (
-                                <div key={index} className="mb-2 d-flex flex-column">
-                                    <div className={`text-break rounded px-2 py-1
+                                <div key={index} className={`mb-2 d-flex flex-column ${message.fromMe ? 'align-self-end':''}`}>
+                                    <div className={`rounded px-2 py-1
                                             ${message.fromMe ? 'bg-primary text-white' : 'border'}`}>
                                         {message.text}
                                     </div>
-                                    <div className={`text-break text-muted small ${message.fromMe ? 
+                                    <div className={`text-muted small ${message.fromMe ? 
                                         'text-right' : ''
                                     }`}>
-                                        {message.fromMe ? 'you' : message.sender.name}
+                                        {message.fromMe ? 'you' : message.senderName}
                                     </div>
                                 </div>
                             )
                         })
+                        
                     }
-        
 
-
+                        <div ref={lastMessageRef} />
 
                 </div>
             </div>
