@@ -68,7 +68,7 @@ export const ConversationProvider = ({ id, children }) => {
 
         const selected = index === selectedConversationIndex
 
-        return { ...conversation, recipients, selected }
+        return { ...conversation, recipients, selected, messages }
     })
 
     return (
