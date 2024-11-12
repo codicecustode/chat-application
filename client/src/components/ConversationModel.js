@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import { useContacts } from '../context/ContactsProvider';
 import { useConversation } from '../context/ConversationProvider';
-export const NewConversation = () => {
+export const NewConversation = ({ setShowConversation }) => {
+
+    setShowConversation(false)
     const [selectedContactIds, setSelectedContactIds] = useState([])
     const { contacts } = useContacts()
     const { createConversation } = useConversation()
@@ -10,9 +12,9 @@ export const NewConversation = () => {
     const handleCheckBoxChange = (contactId) => {
         if (selectedContactIds.includes(contactId)) {
             setSelectedContactIds(selectedContactIds.filter(id => id !== contactId))
-            } else {
-                setSelectedContactIds([...selectedContactIds, contactId])
-            }
+        } else {
+            setSelectedContactIds([...selectedContactIds, contactId])
+        }
     }
 
     const handleSubmit = (e) => {
@@ -48,4 +50,3 @@ export const NewConversation = () => {
 
     )
 }
-

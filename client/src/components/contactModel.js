@@ -1,7 +1,9 @@
 import React, { useRef } from 'react'
 import { useModelShow } from '../context/ModelShowContext';
 import { useContacts } from '../context/ContactsProvider';
-export const NewContact = () => {
+export const NewContact = ({setShowConversation}) => {
+
+    setShowConversation(false)
 
     const nameRef = useRef();
     const idRef = useRef();
