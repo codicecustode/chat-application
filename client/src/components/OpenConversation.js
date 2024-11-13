@@ -68,8 +68,6 @@ export const OpenConversation = () => {
                 </Form.Group>
 
             </Form>
-
-
         </div>
     )
 }
