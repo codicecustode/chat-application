@@ -10,7 +10,6 @@ function App() {
 
   return (
     <SocketProvider>
-
       <ContactsProvider id={id}>
         <ConversationProvider id={id}>
           <ModelShowProvider>
@@ -18,7 +17,6 @@ function App() {
           </ ModelShowProvider>
         </ConversationProvider>
       </ContactsProvider>
-
     </SocketProvider>
 
   );
